@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090c">
+<title>Cars Astro | Admin</title>
+
+<style>
+:root{
+  --bg:#07090d;
+  --p:#10141b;
+  --p2:#151a22;
+  --line:#282f39;
+  --text:#f5f7fa;
+  --muted:#9ca5b1;
+  --red:#e50914;
+  --green:#22c77a
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:radial-gradient(circle at 50% -20%,#202631,#07090d 55%);
+  color:var(--text);
+  font-family:Arial,Tahoma,sans-serif
+}
+
+.wrap{
+  width:min(1120px,92%);
+  margin:auto
+}
+
+header{
+  border-bottom:1px solid var(--line);
+  background:#080a0eea;
+  backdrop-filter:blur(15px)
+}
+
+.nav{
+  height:72px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.brand{
+  display:flex;
+  gap:11px;
+  align-items:center
+}
+
+.mark{
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  background:#fff;
+  color:#08090c;
+  display:grid;
+  place-items:center;
+  font-weight:900
+}
+
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px
+}
+
+.back{
+  color:#fff;
+  text-decoration:none;
+  border:1px solid var(--line);
+  background:#151a22;
+  padding:10px 14px;
+  border-radius:11px
+}
+
+main{
+  padding:28px 0 60px
+}
+
+.title{
+  margin-bottom:20px
+}
+
+.title h1{
+  font-size:31px;
+  margin:0 0 7px
+}
+
+.title p{
+  color:var(--muted);
+  margin:0
+}
+
+.panel{
+  background:linear-gradient(180deg,#11161e,#0d1117);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 20px 55px #0005
+}
+
+.panel h2{
+  margin:0 0 16px;
+  font-size:20px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px
+}
+
+.full{
+  grid-column:1/-1
+}
+
+.label{
+  display:block;
+  color:#b9c1ca;
+  font-size:12px;
+  margin:0 0 7px
+}
+
+.input,
+.select,
+.area{
+  width:100%;
+  background:#090c11;
+  color:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:13px;
+  outline:0
+}
+
+.area{
+  min-height:110px;
+  resize:vertical
+}
+
+.input:focus,
+.select:focus,
+.area:focus{
+  border-color:#657080
+}
+
+.upload{
+  border:1px dashed #414a57;
+  border-radius:15px;
+  padding:18px;
+  background:#0a0d12
+}
+
+.upload input{
+  width:100%
+}
+
+.previews{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:12px
+}
+
+.prev{
+  position:relative;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  border-radius:10px;
+  background:#080a0e;
+  border:1px solid var(--line)
+}
+
+.prev img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.num{
+  position:absolute;
+  top:5px;
+  right:5px;
+  background:#000c;
+  padding:5px 7px;
+  border-radius:7px;
+  font-size:11px
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:#171c24;
+  color:#fff;
+  padding:13px 17px;
+  border-radius:12px;
+  font-weight:800
+}
+
+.btn:disabled{
+  opacity:.5
+}
+
+.red{
+  background:var(--red);
+  border-color:var(--red)
+}
+
+.danger{
+  background:#2b1114;
+  border-color:#64252b;
+  color:#ff8e95
+}
+
+.notice{
+  padding:13px 15px;
+  border-radius:12px;
+  background:#151a22;
+  color:#b9c1ca;
+  line-height:1.7;
+  font-size:13px
+}
+
+.ok{
+  background:#0d241b;
+  border:1px solid #185a40;
+  color:#83e4ba
+}
+
+.err{
+  background:#2a1115;
+  border:1px solid #65262d;
+  color:#ff9ca3
+}
+
+.progress{
+  height:8px;
+  background:#202630;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:10px
+}
+
+.bar{
+  height:100%;
+  width:0;
+  background:var(--red);
+  transition:.2s
+}
+
+.cars{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px
+}
+
+.carRow{
+  display:flex;
+  gap:12px;
+  padding:12px;
+  background:#11161e;
+  border:1px solid var(--line);
+  border-radius:14px
+}
+
+.carRow img{
+  width:110px;
+  height:80px;
+  object-fit:cover;
+  border-radius:9px
+}
+
+.carRow h3{
+  margin:0 0 7px
+}
+
+.carRow p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px
+}
+
+.rowBtns{
+  margin-top:8px;
+  display:flex;
+  gap:7px
+}
+
+.rowBtns button{
+  padding:7px 10px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:#171c24;
+  color:#fff
+}
+
+.hint{
+  font-size:11px;
+  color:#7f8995;
+  margin-top:6px
+}
+
+@media(max-width:700px){
+  .grid,
+  .cars{
+    grid-template-columns:1fr
+  }
+
+  .full{
+    grid-column:auto
+  }
+
+  .previews{
+    grid-template-columns:repeat(2,1fr)
+  }
+
+  .nav .back{
+    font-size:12px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+
+    <div class="brand">
+      <div class="mark">CA</div>
+
+      <div>
+        <b>CARS ASTRO</b>
+        <small>لوحة التحكم الخاصة</small>
+      </div>
+    </div>
+
+    <a class="back" href="index.html">← الموقع</a>
+
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+<div class="title">
+  <h1>لوحة التحكم</h1>
+  <p>إضافة وإدارة السيارات مباشرة من هاتفك.</p>
+</div>
+
+<!-- GitHub -->
+
+<div class="panel">
+
+<h2>🔐 إعداد GitHub</h2>
+
+<div class="grid">
+
+<div>
+<label class="label">GitHub Username</label>
+<input
+ id="owner"
+ class="input"
+ value="XNMAP"
+ autocomplete="off"
+>
+</div>
+
+<div>
+<label class="label">Repository</label>
+<input
+ id="repo"
+ class="input"
+ value="cars-astro"
+ autocomplete="off"
+>
+</div>
+
+<div>
+<label class="label">Branch</label>
+<input
+ id="branch"
+ class="input"
+ value="main"
+ autocomplete="off"
+>
+</div>
+
+<div>
+<label class="label">GitHub Token</label>
+
+<input
+ id="token"
+ class="input"
+ type="password"
+ placeholder="ضع GitHub Token هنا"
+ autocomplete="off"
+>
+</div>
+
+<div class="full">
+
+<div class="notice">
+
+⚠️ الـRepository المستعمل هو:
+<b>XNMAP/cars-astro</b>
+
+دخل GitHub Token فالمربع أعلاه.
+التوكن كيتخزن محلياً فالمتصفح فقط.
+
+</div>
+
+<div class="actions" style="margin-top:10px">
+
+<button
+ class="btn"
+ type="button"
+ onclick="saveCfg()"
+>
+💾 حفظ الإعدادات
+</button>
+
+<button
+ class="btn"
+ type="button"
+ onclick="testGitHub()"
+>
+🔌 اختبار الاتصال
+</button>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- Add car -->
+
+<div class="panel">
+
+<h2>🚘 نشر سيارة جديدة — حتى 8 صور</h2>
+
+<div class="grid">
+
+<div>
+<label class="label">الماركة *</label>
+<input
+ id="make"
+ class="input"
+ placeholder="Dacia"
+>
+</div>
+
+<div>
+<label class="label">الموديل *</label>
+<input
+ id="model"
+ class="input"
+ placeholder="Sandero Stepway"
+>
+</div>
+
+<div>
+<label class="label">السنة *</label>
+<input
+ id="year"
+ class="input"
+ type="number"
+ placeholder="2017"
+>
+</div>
+
+<div>
+<label class="label">الكيلومتراج *</label>
+<input
+ id="km"
+ class="input"
+ type="number"
+ placeholder="84000"
+>
+</div>
+
+<div>
+<label class="label">الثمن بالدرهم *</label>
+<input
+ id="price"
+ class="input"
+ type="number"
+ placeholder="122000"
+>
+</div>
+
+<div>
+<label class="label">الوقود</label>
+
+<select id="fuel" class="select">
+
+<option>Diesel</option>
+<option>Essence</option>
+<option>Hybrid</option>
+<option>Electric</option>
+
+</select>
+</div>
+
+<div>
+<label class="label">ناقل الحركة</label>
+
+<select id="transmission" class="select">
+
+<option>Manual</option>
+<option>Automatic</option>
+
+</select>
+</div>
+
+<div>
+<label class="label">رقم واتساب</label>
+
+<input
+ id="wa"
+ class="input"
+ value="212642410917"
+>
+</div>
+
+<div class="full">
+
+<label class="label">
+الوصف والتجهيزات
+</label>
+
+<textarea
+ id="desc"
+ class="area"
+ placeholder="مثال: حالة ممتازة، صباغة أصلية، كاميرا خلفية..."
+></textarea>
+
+</div>
+
+<div class="full upload">
+
+<label class="label">
+الصور — من 1 حتى 8
+</label>
+
+<input
+ id="photos"
+ type="file"
+ accept="image/*"
+ multiple
+>
+
+<div class="hint">
+الأفضل صور واضحة. السكريبت يضغطها إلى JPEG قبل الرفع لتقليل الحجم.
+</div>
+
+<div id="previews" class="previews"></div>
+
+</div>
+
+<div class="full">
+
+<div class="actions">
+
+<button
+ class="btn red"
+ id="publish"
+>
+🚀 نشر السيارة
+</button>
+
+<button
+ class="btn"
+ id="clear"
+ type="button"
+>
+مسح
+</button>
+
+</div>
+
+</div>
+
+<div class="full">
+
+<div
+ id="status"
+ class="notice"
+>
+جاهز للنشر.
+</div>
+
+<div class="progress">
+<div id="bar" class="bar"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Cars -->
+
+<div class="panel">
+
+<h2>📋 السيارات المنشورة</h2>
+
+<div id="cars" class="cars"></div>
+
+</div>
+
+</div>
+</main>
+
+
+<script>
+
+/* =====================================
+   CARS ASTRO SETTINGS
+   ===================================== */
+
+const CONFIG = {
+  OWNER:"XNMAP",
+  REPO:"cars-astro",
+  BRANCH:"main",
+  TOKEN:""
+};
+
+const API="https://api.github.com";
+
+const INDEX_PATH="index.html";
+
+let catalog=[];
+let selectedFiles=[];
+
+
+/* =====================================
+   HELPERS
+   ===================================== */
+
+const $ = s => document.querySelector(s);
+
+const esc = s =>
+  String(s ?? "")
+  .replace(/[&<>"']/g,m=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[m]));
+
+const setStatus = (text,type="") => {
+  $("#status").textContent=text;
+  $("#status").className="notice "+type;
+};
+
+const setBar = n => {
+  $("#bar").style.width=n+"%";
+};
+
+
+/* =====================================
+   CONFIG
+   ===================================== */
+
+function cfg(){
+
+  const saved=
+    JSON.parse(
+      localStorage.getItem("astroCarsGitHub") || "{}"
+    );
+
+  return {
+
+    owner:
+      CONFIG.OWNER ||
+      saved.owner ||
+      $("#owner").value.trim(),
+
+    repo:
+      CONFIG.REPO ||
+      saved.repo ||
+      $("#repo").value.trim(),
+
+    branch:
+      CONFIG.BRANCH ||
+      saved.branch ||
+      $("#branch").value.trim() ||
+      "main",
+
+    token:
+      CONFIG.TOKEN ||
+      saved.token ||
+      $("#token").value.trim()
+
+  };
+}
+
+
+function saveCfg(){
+
+  const owner=
+    CONFIG.OWNER ||
+    $("#owner").value.trim();
+
+  const repo=
+    CONFIG.REPO ||
+    $("#repo").value.trim();
+
+  const branch=
+    CONFIG.BRANCH ||
+    $("#branch").value.trim() ||
+    "main";
+
+  const token=
+    $("#token").value.trim();
+
+  if(!owner || !repo || !token){
+
+    return setStatus(
+      "⚠️ دخل GitHub Token أولاً.",
+      "err"
+    );
+
+  }
+
+  localStorage.setItem(
+    "astroCarsGitHub",
+    JSON.stringify({
+      owner,
+      repo,
+      branch,
+      token
+    })
+  );
+
+  setStatus(
+    "✅ تم حفظ الإعدادات في هذا المتصفح فقط.",
+    "ok"
+  );
+}
+
+
+/* =====================================
+   TEST GITHUB
+   ===================================== */
+
+async function testGitHub(){
+
+  const c=cfg();
+
+  if(!c.owner || !c.repo || !c.token){
+
+    return setStatus(
+      "⚠️ خاصك تعمر إعدادات GitHub أولاً.",
+      "err"
+    );
+
+  }
+
+  try{
+
+    setStatus("⏳ كنختبر الاتصال بـ GitHub...");
+    setBar(20);
+
+    const r=await fetch(
+      `${API}/repos/${encodeURIComponent(c.owner)}/${encodeURIComponent(c.repo)}`,
+      {
+        headers:headers(c.token)
+      }
+    );
+
+    if(!r.ok){
+
+      const msg=await r.text();
+
+      throw new Error(
+        "GitHub رفض الاتصال ("+
+        r.status+
+        "): "+
+        msg.slice(0,250)
+      );
+
+    }
+
+    const data=await r.json();
+
+    setBar(100);
+
+    setStatus(
+      "✅ الاتصال ناجح: "+
+      data.full_name,
+      "ok"
+    );
+
+  }catch(e){
+
+    setBar(0);
+
+    setStatus(
+      "❌ "+e.message,
+      "err"
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   HEADERS
+   ===================================== */
+
+const headers = token => ({
+
+  "Accept":
+    "application/vnd.github+json",
+
+  "Authorization":
+    "Bearer "+token,
+
+  "X-GitHub-Api-Version":
+    "2022-11-28"
+
+});
+
+
+/* =====================================
+   IMAGE SELECTION
+   ===================================== */
+
+$("#photos").addEventListener(
+  "change",
+  e => {
+
+    selectedFiles=
+      [...e.target.files].slice(0,8);
+
+    $("#previews").innerHTML=
+      selectedFiles.map(
+        (f,i)=>`
+
+          <div class="prev">
+
+            <img
+              src="${URL.createObjectURL(f)}"
+            >
+
+            <span class="num">
+              ${i+1}
+            </span>
+
+          </div>
+
+        `
+      ).join("");
+
+    if(e.target.files.length>8){
+
+      setStatus(
+        "تم اختيار أول 8 صور فقط."
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   CLEAR
+   ===================================== */
+
+$("#clear").onclick=()=>{
+
+  [
+    "make",
+    "model",
+    "year",
+    "km",
+    "price",
+    "desc"
+  ].forEach(
+    id=>$("#"+id).value=""
+  );
+
+  $("#photos").value="";
+
+  selectedFiles=[];
+
+  $("#previews").innerHTML="";
+
+  setBar(0);
+
+  setStatus("تم مسح النموذج.");
+
+};
+
+
+/* =====================================
+   GET GITHUB FILE
+   ===================================== */
+
+async function ghGet(c,path){
+
+  const r=await fetch(
+
+    `${API}/repos/`+
+    `${encodeURIComponent(c.owner)}/`+
+    `${encodeURIComponent(c.repo)}/`+
+    `contents/${path}?ref=`+
+    `${encodeURIComponent(c.branch)}`,
+
+    {
+      headers:headers(c.token)
+    }
+
+  );
+
+  if(r.status===404)
+    return null;
+
+  if(!r.ok){
+
+    throw new Error(
+      "GitHub رفض قراءة "+
+      path+
+      " ("+
+      r.status+
+      ")"
+    );
+
+  }
+
+  return r.json();
+
+}
+
+
+/* =====================================
+   PUT FILE
+   ===================================== */
+
+async function ghPut(
+  c,
+  path,
+  b64,
+  message,
+  sha
+){
+
+  const body={
+    message,
+    content:b64,
+    branch:c.branch
+  };
+
+  if(sha)
+    body.sha=sha;
+
+  const r=await fetch(
+
+    `${API}/repos/`+
+    `${encodeURIComponent(c.owner)}/`+
+    `${encodeURIComponent(c.repo)}/`+
+    `contents/${path}`,
+
+    {
+      method:"PUT",
+
+      headers:{
+        ...headers(c.token),
+        "Content-Type":
+          "application/json"
+      },
+
+      body:JSON.stringify(body)
+    }
+
+  );
+
+  if(!r.ok){
+
+    let msg=await r.text();
+
+    throw new Error(
+      "GitHub: "+
+      msg.slice(0,450)
+    );
+
+  }
+
+  return r.json();
+
+}
+
+
+/* =====================================
+   BASE64
+   ===================================== */
+
+function decodeBase64(s){
+
+  const bytes=
+    Uint8Array.from(
+      atob(s.replace(/\n/g,"")),
+      c=>c.charCodeAt(0)
+    );
+
+  return new TextDecoder().decode(bytes);
+
+}
+
+
+function encodeBase64(s){
+
+  const bytes=
+    new TextEncoder().encode(s);
+
+  let bin="";
+
+  bytes.forEach(
+    b=>bin+=String.fromCharCode(b)
+  );
+
+  return btoa(bin);
+
+}
+
+
+/* =====================================
+   BLOB BASE64
+   ===================================== */
+
+async function blob64(blob){
+
+  return new Promise(
+    (res,rej)=>{
+
+      const r=new FileReader;
+
+      r.onload=()=>{
+        res(
+          r.result.split(",")[1]
+        );
+      };
+
+      r.onerror=rej;
+
+      r.readAsDataURL(blob);
+
+    }
+  );
+
+}
+
+
+/* =====================================
+   IMAGE COMPRESS
+   ===================================== */
+
+async function compress(file){
+
+  const img=
+    await new Promise(
+      (res,rej)=>{
+
+        const i=new Image;
+
+        i.onload=()=>res(i);
+
+        i.onerror=rej;
+
+        i.src=
+          URL.createObjectURL(file);
+
+      }
+    );
+
+  const max=1800;
+
+  const scale=
+    Math.min(
+      1,
+      max/
+      Math.max(
+        img.width,
+        img.height
+      )
+    );
+
+  const cv=
+    document.createElement("canvas");
+
+  cv.width=
+    Math.round(img.width*scale);
+
+  cv.height=
+    Math.round(img.height*scale);
+
+  cv
+    .getContext("2d")
+    .drawImage(
+      img,
+      0,
+      0,
+      cv.width,
+      cv.height
+    );
+
+  return new Promise(
+    res=>
+      cv.toBlob(
+        res,
+        "image/jpeg",
+        .82
+      )
+  );
+
+}
+
+
+/* =====================================
+   READ CATALOG
+   ===================================== */
+
+async function readCatalog(c){
+
+  const f=
+    await ghGet(
+      c,
+      INDEX_PATH
+    );
+
+  if(!f)
+    throw new Error(
+      "index.html غير موجود في Repository."
+    );
+
+  const text=
+    decodeBase64(f.content);
+
+  const m=
+    text.match(
+      /const ASTRO_CARS_DATA\s*=\s*(\[[\s\S]*?\]);/
+    );
+
+  if(!m){
+
+    throw new Error(
+      "لم يتم العثور على ASTRO_CARS_DATA داخل index.html."
+    );
+
+  }
+
+  let data=[];
+
+  try{
+
+    data=JSON.parse(m[1]);
+
+  }catch{
+
+    throw new Error(
+      "بيانات السيارات داخل index.html غير صالحة."
+    );
+
+  }
+
+  return {
+    file:f,
+    text,
+    data
+  };
+
+}
+
+
+/* =====================================
+   REPLACE CATALOG
+   ===================================== */
+
+function replaceCatalog(text,data){
+
+  const json=
+    JSON.stringify(
+      data,
+      null,
+      2
+    );
+
+  return text.replace(
+    /const ASTRO_CARS_DATA\s*=\s*(\[[\s\S]*?\]);/,
+    "const ASTRO_CARS_DATA = "+
+    json+
+    ";"
+  );
+
+}
+
+
+/* =====================================
+   PUBLISH CAR
+   ===================================== */
+
+async function publish(){
+
+  const c=cfg();
+
+  if(!c.owner || !c.repo || !c.token){
+
+    return setStatus(
+      "⚠️ خاصك تعمر إعدادات GitHub.",
+      "err"
+    );
+
+  }
+
+  const make=
+    $("#make").value.trim();
+
+  const model=
+    $("#model").value.trim();
+
+  const year=
+    $("#year").value.trim();
+
+  const km=
+    $("#km").value.trim();
+
+  const price=
+    $("#price").value.trim();
+
+  if(
+    !make ||
+    !model ||
+    !year ||
+    !km ||
+    !price ||
+    !selectedFiles.length
+  ){
+
+    return setStatus(
+      "⚠️ عمر الماركة، الموديل، السنة، الكيلومتراج، الثمن واختار صورة.",
+      "err"
+    );
+
+  }
+
+  if(selectedFiles.length>8){
+
+    return setStatus(
+      "⚠️ الحد الأقصى هو 8 صور.",
+      "err"
+    );
+
+  }
+
+  try{
+
+    $("#publish").disabled=true;
+
+    setBar(3);
+
+    setStatus(
+      "⏳ كنجيب البيانات الحالية من GitHub..."
+    );
+
+    const current=
+      await readCatalog(c);
+
+    const carId=
+      Date.now().toString(36)+
+      "-"+
+      Math.random()
+      .toString(36)
+      .slice(2,7);
+
+    const car={
+
+      id:carId,
+
+      make,
+
+      model,
+
+      year:Number(year),
+
+      km:Number(km),
+
+      price:Number(price),
+
+      fuel:
+        $("#fuel").value,
+
+      transmission:
+        $("#transmission").value,
+
+      desc:
+        $("#desc").value.trim(),
+
+      images:[],
+
+      createdAt:
+        Date.now(),
+
+      wa:
+        $("#wa").value.trim() ||
+        "212642410917"
+
+    };
+
+
+    /* Upload images */
+
+    for(
+      let i=0;
+      i<selectedFiles.length;
+      i++
+    ){
+
+      setStatus(
+        `⏳ ضغط ورفع الصورة ${i+1} من ${selectedFiles.length}...`
+      );
+
+      setBar(
+        10+
+        (i/
+        selectedFiles.length)*
+        70
+      );
+
+      const blob=
+        await compress(
+          selectedFiles[i]
+        );
+
+      const b64=
+        await blob64(blob);
+
+      const path=
+        `cars/${carId}-${i+1}.jpg`;
+
+      await ghPut(
+
+        c,
+
+        path,
+
+        b64,
+
+        `Add ${make} ${model} image ${i+1}/${selectedFiles.length}`,
+
+        null
+
+      );
+
+      car.images.push(
+        "./"+path
+      );
+
+    }
+
+
+    /* Update index */
+
+    setBar(84);
+
+    setStatus(
+      "⏳ كنحدّث index.html..."
+    );
+
+    current.data.unshift(car);
+
+    const updated=
+      replaceCatalog(
+        current.text,
+        current.data
+      );
+
+    await ghPut(
+
+      c,
+
+      INDEX_PATH,
+
+      encodeBase64(updated),
+
+      "Publish "+
+      make+
+      " "+
+      model,
+
+      current.file.sha
+
+    );
+
+
+    catalog=current.data;
+
+    renderCars();
+
+    setBar(100);
+
+    setStatus(
+      "✅ تم نشر السيارة بنجاح. GitHub Pages قد يحتاج بضع دقائق باش يحدّث الموقع.",
+      "ok"
+    );
+
+
+    [
+      "make",
+      "model",
+      "year",
+      "km",
+      "price",
+      "desc"
+    ].forEach(
+      id=>$("#"+id).value=""
+    );
+
+    $("#photos").value="";
+
+    selectedFiles=[];
+
+    $("#previews").innerHTML="";
+
+
+  }catch(e){
+
+    console.error(e);
+
+    setBar(0);
+
+    setStatus(
+      "❌ "+e.message,
+      "err"
+    );
+
+  }finally{
+
+    $("#publish").disabled=false;
+
+  }
+
+}
+
+
+/* =====================================
+   RENDER CARS
+   ===================================== */
+
+function renderCars(){
+
+  if(!catalog.length){
+
+    $("#cars").innerHTML=
+      '<div class="notice">ما كايناش سيارات منشورة بعد.</div>';
+
+    return;
+
+  }
+
+  $("#cars").innerHTML=
+
+    catalog.map(
+      c=>`
+
+      <div class="carRow">
+
+        <img
+          src="${esc(c.images?.[0]||"")}"
+        >
+
+        <div style="flex:1">
+
+          <h3>
+            ${esc(c.make)}
+            ${esc(c.model)}
+          </h3>
+
+          <p>
+            ${esc(c.year)}
+            •
+            ${new Intl.NumberFormat("fr-FR")
+              .format(c.km||0)}
+            km
+            •
+            ${new Intl.NumberFormat("fr-MA")
+              .format(c.price||0)}
+            DH
+          </p>
+
+          <div class="rowBtns">
+
+            <button
+              onclick="deleteCar('${esc(c.id)}')"
+            >
+              🗑️ حذف
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =====================================
+   DELETE FILE
+   ===================================== */
+
+async function ghDelete(
+  c,
+  path,
+  sha,
+  message
+){
+
+  const r=await fetch(
+
+    `${API}/repos/`+
+    `${encodeURIComponent(c.owner)}/`+
+    `${encodeURIComponent(c.repo)}/`+
+    `contents/${path}`,
+
+    {
+
+      method:"DELETE",
+
+      headers:{
+        ...headers(c.token),
+        "Content-Type":
+          "application/json"
+      },
+
+      body:JSON.stringify({
+
+        message,
+
+        sha,
+
+        branch:c.branch
+
+      })
+
+    }
+
+  );
+
+  if(!r.ok){
+
+    throw new Error(
+      "GitHub رفض حذف "+
+      path+
+      " ("+
+      r.status+
+      ")"
+    );
+
+  }
+
+  return r.json();
+
+}
+
+
+/* =====================================
+   DELETE CAR
+   ===================================== */
+
+async function deleteCar(id){
+
+  if(
+    !confirm(
+      "واش متأكد بغيتي تحذف الإعلان والصور ديالو؟"
+    )
+  )
+    return;
+
+  const c=cfg();
+
+  try{
+
+    setStatus(
+      "⏳ كنحذف الإعلان..."
+    );
+
+    const current=
+      await readCatalog(c);
+
+    const car=
+      current.data.find(
+        x=>x.id===id
+      );
+
+    const newData=
+      current.data.filter(
+        x=>x.id!==id
+      );
+
+    if(!car){
+
+      return setStatus(
+        "السيارة غير موجودة.",
+        "err"
+      );
+
+    }
+
+
+    /* Update index first */
+
+    await ghPut(
+
+      c,
+
+      INDEX_PATH,
+
+      encodeBase64(
+        replaceCatalog(
+          current.text,
+          newData
+        )
+      ),
+
+      "Delete car "+id,
+
+      current.file.sha
+
+    );
+
+
+    /* Delete images */
+
+    for(
+      const img of
+      (car.images||[])
+    ){
+
+      const path=
+        img.replace(
+          /^\.\//,
+          ""
+        );
+
+      try{
+
+        const f=
+          await ghGet(
+            c,
+            path
+          );
+
+        if(f){
+
+          await ghDelete(
+
+            c,
+
+            path,
+
+            f.sha,
+
+            "Delete image for car "+id
+
+          );
+
+        }
+
+      }catch(err){
+
+        console.warn(err);
+
+      }
+
+    }
+
+
+    catalog=newData;
+
+    renderCars();
+
+    setStatus(
+      "✅ تحذف الإعلان والصور ديالو.",
+      "ok"
+    );
+
+
+  }catch(e){
+
+    setStatus(
+      "❌ "+e.message,
+      "err"
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   INIT
+   ===================================== */
+
+async function init(){
+
+  const saved=
+    JSON.parse(
+      localStorage.getItem(
+        "astroCarsGitHub"
+      ) || "{}"
+    );
+
+  $("#owner").value=
+    CONFIG.OWNER ||
+    saved.owner ||
+    "XNMAP";
+
+  $("#repo").value=
+    CONFIG.REPO ||
+    saved.repo ||
+    "cars-astro";
+
+  $("#branch").value=
+    CONFIG.BRANCH ||
+    saved.branch ||
+    "main";
+
+
+  const c=cfg();
+
+  if(
+    !c.owner ||
+    !c.repo ||
+    !c.token
+  ){
+
+    renderCars();
+
+    return;
+
+  }
+
+
+  try{
+
+    const x=
+      await readCatalog(c);
+
+    catalog=x.data;
+
+    renderCars();
+
+  }catch(e){
+
+    setStatus(
+      "ملاحظة: "+e.message,
+      "err"
+    );
+
+  }
+
+}
+
+
+/* =====================================
+   START
+   ===================================== */
+
+$("#publish").onclick=publish;
+
+$("#token").addEventListener(
+  "change",
+  saveCfg
+);
+
+init();
+
+</script>
+
+</body>
+</html>
